@@ -265,6 +265,7 @@
                 "unit": {
                   "type": "string",
                   "enum": [
+                    "seconds",
                     "minutes",
                     "hours"
                   ]
