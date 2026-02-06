@@ -1,0 +1,525 @@
+{
+    "type": "object",
+    "properties": {
+      "spec": {
+        "type": "string",
+        "enum": [
+          "OCRS/1.0"
+        ]
+      },
+      "recipe": {
+        "type": "object",
+        "properties": {
+          "name": {
+            "type": "string"
+          },
+          "style": {
+            "type": "string",
+            "enum": [
+              "FRESH",
+              "SOFT",
+              "SEMI_SOFT",
+              "SEMI_HARD",
+              "HARD",
+              "BLUE",
+              "BRINED"
+            ]
+          },
+          "milkType": {
+            "type": "string",
+            "enum": [
+              "COW",
+              "GOAT",
+              "SHEEP",
+              "BUFFALO",
+              "MIXED"
+            ]
+          },
+          "origin": {
+            "type": "string"
+          },
+          "difficulty": {
+            "type": "string",
+            "enum": [
+              "BEGINNER",
+              "INTERMEDIATE",
+              "ADVANCED",
+              "EXPERT"
+            ]
+          },
+          "batchSize": {
+            "type": "object",
+            "properties": {
+              "milkVolume": {
+                "type": "number"
+              },
+              "unit": {
+                "type": "string",
+                "enum": [
+                  "liters",
+                  "gallons"
+                ]
+              }
+            },
+            "required": [
+              "milkVolume",
+              "unit"
+            ],
+            "propertyOrdering": [
+              "milkVolume",
+              "unit"
+            ]
+          },
+          "yield": {
+            "type": "object",
+            "properties": {
+              "amount": {
+                "type": "number"
+              },
+              "unit": {
+                "type": "string",
+                "enum": [
+                  "kg",
+                  "lbs",
+                  "grams",
+                  "oz"
+                ]
+              }
+            },
+            "required": [
+              "amount",
+              "unit"
+            ],
+            "propertyOrdering": [
+              "amount",
+              "unit"
+            ]
+          },
+          "totalTime": {
+            "type": "integer",
+            "description": "Total active time in minutes (excluding aging)"
+          },
+          "prepTime": {
+            "type": "integer",
+            "description": "Prep time in minutes"
+          },
+          "source": {
+            "type": "object",
+            "properties": {
+              "type": {
+                "type": "string",
+                "enum": [
+                  "BOOK",
+                  "WEBSITE",
+                  "ORIGINAL",
+                  "TRADITIONAL",
+                  "COURSE",
+                  "OTHER"
+                ]
+              },
+              "reference": {
+                "type": "string"
+              }
+            },
+            "required": [
+              "type"
+            ],
+            "propertyOrdering": [
+              "type",
+              "reference"
+            ]
+          }
+        },
+        "required": [
+          "name",
+          "style",
+          "milkType",
+          "difficulty",
+          "batchSize"
+        ],
+        "propertyOrdering": [
+          "name",
+          "style",
+          "milkType",
+          "origin",
+          "difficulty",
+          "batchSize",
+          "yield",
+          "totalTime",
+          "prepTime",
+          "source"
+        ]
+      },
+      "ingredients": {
+        "type": "array",
+        "items": {
+          "type": "object",
+          "properties": {
+            "name": {
+              "type": "string"
+            },
+            "type": {
+              "type": "string",
+              "enum": [
+                "PRIMARY",
+                "CULTURE",
+                "COAGULANT",
+                "ADDITIVE",
+                "SEASONING",
+                "OTHER"
+              ]
+            },
+            "amount": {
+              "type": "number"
+            },
+            "unit": {
+              "type": "string"
+            },
+            "preparation": {
+              "type": "string"
+            }
+          },
+          "required": [
+            "name",
+            "type",
+            "amount",
+            "unit"
+          ],
+          "propertyOrdering": [
+            "name",
+            "type",
+            "amount",
+            "unit",
+            "preparation"
+          ]
+        }
+      },
+      "steps": {
+        "type": "array",
+        "items": {
+          "type": "object",
+          "properties": {
+            "stepNumber": {
+              "type": "integer"
+            },
+            "title": {
+              "type": "string"
+            },
+            "category": {
+              "type": "string",
+              "enum": [
+                "HEATING",
+                "COAGULATION",
+                "CUTTING",
+                "DRAINING",
+                "SALTING",
+                "PRESSING",
+                "AGING",
+                "OTHER"
+              ]
+            },
+            "instructions": {
+              "type": "string"
+            },
+            "temperature": {
+              "type": "object",
+              "properties": {
+                "target": {
+                  "type": "number"
+                },
+                "unit": {
+                  "type": "string",
+                  "enum": [
+                    "C",
+                    "F"
+                  ]
+                }
+              },
+              "required": [
+                "target",
+                "unit"
+              ],
+              "propertyOrdering": [
+                "target",
+                "unit"
+              ]
+            },
+            "ph": {
+              "type": "number",
+              "description": "Target pH value for this step (e.g., 6.4 for cutting, 5.2 for draining)"
+            },
+            "duration": {
+              "type": "object",
+              "properties": {
+                "type": {
+                  "type": "string",
+                  "enum": [
+                    "FIXED",
+                    "UNTIL_CONDITION",
+                    "RANGE"
+                  ]
+                },
+                "value": {
+                  "type": "integer"
+                },
+                "unit": {
+                  "type": "string",
+                  "enum": [
+                    "minutes",
+                    "hours"
+                  ]
+                },
+                "condition": {
+                  "type": "string"
+                }
+              },
+              "required": [
+                "type"
+              ],
+              "propertyOrdering": [
+                "type",
+                "value",
+                "unit",
+                "condition"
+              ]
+            },
+            "validation": {
+              "type": "object",
+              "properties": {
+                "expectedResult": {
+                  "type": "string"
+                }
+              },
+              "propertyOrdering": [
+                "expectedResult"
+              ]
+            }
+          },
+          "required": [
+            "stepNumber",
+            "title",
+            "category",
+            "instructions"
+          ],
+          "propertyOrdering": [
+            "stepNumber",
+            "title",
+            "category",
+            "instructions",
+            "temperature",
+            "ph",
+            "duration",
+            "validation"
+          ]
+        }
+      },
+      "aging": {
+        "type": "object",
+        "properties": {
+          "required": {
+            "type": "boolean"
+          },
+          "duration": {
+            "type": "object",
+            "properties": {
+              "min": {
+                "type": "integer"
+              },
+              "max": {
+                "type": "integer"
+              },
+              "unit": {
+                "type": "string",
+                "enum": [
+                  "days",
+                  "weeks",
+                  "months"
+                ]
+              }
+            },
+            "required": [
+              "min",
+              "unit"
+            ],
+            "propertyOrdering": [
+              "min",
+              "max",
+              "unit"
+            ]
+          },
+          "temperature": {
+            "type": "object",
+            "properties": {
+              "value": {
+                "type": "number"
+              },
+              "unit": {
+                "type": "string",
+                "enum": [
+                  "C",
+                  "F"
+                ]
+              }
+            },
+            "required": [
+              "value",
+              "unit"
+            ],
+            "propertyOrdering": [
+              "value",
+              "unit"
+            ]
+          },
+          "humidity": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "required"
+        ],
+        "propertyOrdering": [
+          "required",
+          "duration",
+          "temperature",
+          "humidity"
+        ]
+      },
+      "finalProduct": {
+        "type": "object",
+        "properties": {
+          "texture": {
+            "type": "string"
+          },
+          "flavor": {
+            "type": "string"
+          },
+          "moisture": {
+            "type": "string",
+            "enum": [
+              "HIGH",
+              "MEDIUM",
+              "LOW"
+            ]
+          },
+          "color": {
+            "type": "string"
+          }
+        },
+        "propertyOrdering": [
+          "texture",
+          "flavor",
+          "moisture",
+          "color"
+        ]
+      },
+      "equipment": {
+        "type": "object",
+        "properties": {
+          "required": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "properties": {
+                "name": {
+                  "type": "string"
+                }
+              },
+              "required": [
+                "name"
+              ],
+              "propertyOrdering": [
+                "name"
+              ]
+            }
+          },
+          "specialEquipment": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "properties": {
+                "name": {
+                  "type": "string"
+                },
+                "purpose": {
+                  "type": "string"
+                },
+                "alternatives": {
+                  "type": "string"
+                }
+              },
+              "required": [
+                "name"
+              ],
+              "propertyOrdering": [
+                "name",
+                "purpose",
+                "alternatives"
+              ]
+            }
+          }
+        },
+        "propertyOrdering": [
+          "required",
+          "specialEquipment"
+        ]
+      },
+      "safety": {
+        "type": "object",
+        "properties": {
+          "allergens": {
+            "type": "array",
+            "items": {
+              "type": "string",
+              "enum": [
+                "MILK",
+                "LACTOSE",
+                "NUTS",
+                "SOY",
+                "GLUTEN",
+                "EGGS"
+              ]
+            }
+          },
+          "shelfLife": {
+            "type": "object",
+            "properties": {
+              "fresh": {
+                "type": "string"
+              },
+              "aged": {
+                "type": "string"
+              }
+            },
+            "propertyOrdering": [
+              "fresh",
+              "aged"
+            ]
+          },
+          "storageInstructions": {
+            "type": "string"
+          }
+        },
+        "propertyOrdering": [
+          "allergens",
+          "shelfLife",
+          "storageInstructions"
+        ]
+      }
+    },
+    "required": [
+      "spec",
+      "recipe",
+      "ingredients",
+      "steps"
+    ],
+    "propertyOrdering": [
+      "spec",
+      "recipe",
+      "ingredients",
+      "steps",
+      "aging",
+      "finalProduct",
+      "equipment",
+      "safety"
+    ]
+  }
