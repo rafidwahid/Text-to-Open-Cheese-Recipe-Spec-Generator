@@ -61,10 +61,19 @@ Your task is to:
 - RANGE: Time window (use min/max)
 - When a step has both a duration AND a target pH, include both fields
 
+### CRITICAL: Faithfulness to Source Text
+- **NEVER fabricate or infer data that is not explicitly stated in the recipe.**
+- If a step does NOT mention a temperature, do NOT include the `temperature` field for that step.
+- If a step does NOT mention a pH value, do NOT include the `ph` field for that step.
+- If a step does NOT mention a duration, do NOT include the `duration` field for that step.
+- Only populate optional fields when the source text **explicitly provides** that information for the specific step.
+- Do NOT assign a temperature of 0 or any placeholder value — simply omit the field entirely.
+- Example: "dissolve the rennet tablet in water" has NO temperature — do not add one.
+
 ### Important Rules
-1. Convert all durations to minutes for the value field
+1. Convert all durations to the most appropriate unit (seconds, minutes, or hours). Use seconds for sub-minute durations (e.g., "stir for 30 seconds" → value: 30, unit: "seconds")
 2. Always include unit field alongside value (minutes, hours)
-3. If information is not in the recipe, omit the optional field
+3. If information is not in the recipe, omit the optional field — never guess or infer
 4. Extract equipment mentioned in the recipe
 5. Always include MILK and LACTOSE in allergens for dairy recipes
 6. Parse aging info carefully - distinguish min/max times

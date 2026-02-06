@@ -1,0 +1,40 @@
+{
+  "name": "text-to-open-cheese-recipe-spec-generator",
+  "version": "1.0.0",
+  "description": "A structured schema for converting free-form cheese recipes into machine-readable JSON format using LLMs.",
+  "main": "dist/src/ocrs-parser/index.js",
+  "exports": {
+    ".": "./dist/src/ocrs-parser/index.js"
+  },
+  "directories": {
+    "doc": "docs",
+    "example": "examples"
+  },
+  "scripts": {
+    "build": "tsc",
+    "test": "vitest run",
+    "test:watch": "vitest"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/rafidwahid/Text-to-Open-Cheese-Recipe-Spec-Generator.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "type": "module",
+  "bugs": {
+    "url": "https://github.com/rafidwahid/Text-to-Open-Cheese-Recipe-Spec-Generator/issues"
+  },
+  "homepage": "https://github.com/rafidwahid/Text-to-Open-Cheese-Recipe-Spec-Generator#readme",
+  "dependencies": {
+    "openai": "^6.18.0",
+    "zod": "^4.3.6"
+  },
+  "devDependencies": {
+    "@types/node": "^25.2.1",
+    "dotenv": "^17.2.4",
+    "typescript": "^5.9.3",
+    "vitest": "^4.0.18"
+  }
+}
